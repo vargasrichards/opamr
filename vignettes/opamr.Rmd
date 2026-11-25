@@ -1,0 +1,109 @@
+---
+title: "Getting started with opamr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with opamr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 85 / 25.4, fig.height = 85 * 0.62 / 25.4,
+                      dpi = 150, out.width = "70%", fig.align = "center")
+```
+
+`opamr` has three parts:
+
+1. **A crosswalk** between antimicrobial names, `AMR` package codes, ATC codes and British National Formulary
+   (BNF) chemical codes. It is bundled with the package and works offline.
+2. **Functions for the OpenPrescribing API**, which serves monthly prescribing data for English primary care
+   by practice, Primary Care Network (PCN), Sub-ICB Location, ICB and region.
+3. **Figure functions** for prescribing time series, seasonality, variation between organisations and
+   drug-by-month heatmaps, sized and styled for journals.
+
+This vignette shows each part using only bundled data, so every chunk runs without a network connection.
+`vignette("api", package = "opamr")` covers downloading data.
+
+```{r}
+library(opamr)
+```
+
+## From antimicrobial names to BNF codes
+
+Prescribing data are indexed by BNF code, while resistance data and the `AMR` package use antimicrobial
+names, `AMR` codes or ATC codes. `ab_to_bnf()` converts any of these:
+
+```{r}
+ab_to_bnf(c("amoxicillin", "NIT", "J01AA02"), use_amr = FALSE)
+```
+
+One antimicrobial can have several BNF chemical codes, one for each salt or formulation, such as the two
+doxycycline salts. ATC prefixes and `AMR` group names select a whole class:
+
+```{r}
+ab_to_bnf("J01MA", output = "codes")     # quinolones
+```
+
+The reverse direction accepts any BNF level, from a 15-character presentation code up to a section:
+
+```{r}
+bnf_to_ab(c("0501013B0AAAAAA", "0501130R0"))[, c("input", "ab", "ab_name", "atc")]
+```
+
+`vignette("crosswalk", package = "opamr")` describes how the crosswalk was built and where it stops.
+
+## Prescribing data
+
+The live functions return a tidy data frame with one row per code, organisation and month:
+
+```{r, eval = FALSE}
+use <- op_spending_ab(c("amoxicillin", "nitrofurantoin", "doxycycline"))       # England
+sub <- op_antibiotic_use("co-amoxiclav", org_type = "sicbl", org = "02P")      # items per 1,000 patients
+```
+
+The bundled `op_example` dataset has the same layout as `op_spending_ab()` output. It covers national monthly
+totals for every antibacterial in BNF section 5.1 from November 2020 to June 2026, aggregated from the NHS
+Business Services Authority English Prescribing Dataset.
+
+```{r}
+str(op_example)
+range(op_example$date)
+```
+
+The ten most-prescribed antibacterials over the period:
+
+```{r}
+tot <- aggregate(items ~ ab_name, data = op_example, FUN = sum)
+tot$share <- round(100 * tot$items / sum(tot$items), 1)
+head(tot[order(-tot$items), ], 10)
+```
+
+## A first figure
+
+```{r first-figure}
+top <- op_example[op_example$ab_name %in% c("Amoxicillin", "Doxycycline", "Nitrofurantoin",
+                                            "Flucloxacillin", "Trimethoprim"), ]
+op_plot_trend(top, y = "items",
+              events = data.frame(date = "2022-12-01", label = "Strep A surge"))
+```
+
+Each line is labelled at its right-hand end, so there is no legend. The colours come from the
+colour-blind-safe Okabe-Ito palette. The caption cites the data source and licence. `op_save()` writes the
+figure at a journal column width:
+
+```{r, eval = FALSE}
+p <- op_plot_trend(top, y = "items")
+op_save(p, "figure1.pdf", width = "single")    # 85 mm wide; "onehalf" = 120 mm, "double" = 178 mm
+```
+
+`vignette("figures", package = "opamr")` covers all of the figure functions.
+
+## What the data measure
+
+- **Setting.** Items dispensed in the community on prescriptions issued in English primary care. Hospital
+  inpatient use is not included.
+- **Unit.** The prescription item, which says nothing about dose, duration or the patient. `quantity` is in
+  product units (tablets, ml), so it cannot be compared across drugs.
+- **Timeliness.** Data are published monthly, about two months after dispensing.
+- **Licence.** Open Government Licence v3.0. Cite the NHS Business Services Authority and OpenPrescribing
+  (Bennett Institute for Applied Data Science, University of Oxford).

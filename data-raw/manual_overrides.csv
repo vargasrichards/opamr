@@ -1,0 +1,10 @@
+bnf_chemical_code,ab,note
+0501021M0,CED,Cefradine (AMR name: Cephradine)
+0501070I0,COL,Colistimethate sodium is the prodrug of colistin (shared ATC J01XB01)
+0501021H0,CAZ,Ceftazidime (plain); name-matching returned ceftazidime/avibactam
+0501090H0,ETH,Ethambutol; name-matching returned ethambutol/isoniazid
+0501070N0,FUS,Sodium fusidate is a salt of fusidic acid
+1310012Q0,FUS,Sodium fusidate (topical)
+1201010AF,CIP,Ciprofloxacin/fluocinolone ear drops - antibacterial component only
+0501090S0,,Rifampicin combined preparations - fixed-dose combinations; no single AMR agent
+0501070U0,VAN,Vancomycin hydrochloride (name-matching returned a macromethod code)

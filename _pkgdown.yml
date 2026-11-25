@@ -1,0 +1,74 @@
+url: https://OWNER.github.io/opamr/
+
+template:
+  bootstrap: 5
+  bslib:
+    primary: "#0072B2"
+
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+    right: [search, github]
+  components:
+    github:
+      icon: fa-github
+      href: https://github.com/OWNER/opamr
+      aria-label: GitHub
+
+home:
+  title: "opamr: antibiotic prescribing data from OpenPrescribing, linked to the AMR package"
+  sidebar:
+    structure: [links, license, citation, authors]
+
+articles:
+- title: Guides
+  navbar: ~
+  contents:
+  - opamr
+  - crosswalk
+  - api
+  - figures
+
+reference:
+- title: Crosswalk
+  desc: Convert between antimicrobial names, AMR codes, ATC codes and BNF codes (offline).
+  contents:
+  - ab_to_bnf
+  - bnf_to_ab
+  - atc_to_bnf
+  - op_antibiotics
+  - bnf_level
+- title: Prescribing data
+  desc: Monthly items, quantity and cost from the OpenPrescribing API.
+  contents:
+  - op_spending
+  - op_spending_ab
+  - op_antibiotic_use
+- title: Denominators and rates
+  contents:
+  - op_org_details
+  - op_rate
+- title: Lookups and API utilities
+  contents:
+  - op_bnf_search
+  - op_org_search
+  - op_check_api
+  - op_cache_clear
+- title: Figures
+  desc: Publication-quality ggplot2 figures with a colour-blind safe palette and direct labels.
+  contents:
+  - op_plot_trend
+  - op_plot_seasonal
+  - op_plot_distribution
+  - op_plot_heatmap
+  - op_save
+  - theme_op
+  - scale_colour_op
+  - op_palette
+- title: Data
+  contents:
+  - antibiotic_crosswalk
+  - op_example
+- title: Package
+  contents:
+  - opamr-package

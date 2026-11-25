@@ -1,0 +1,171 @@
+---
+title: "Antimicrobial names, AMR codes, ATC codes and BNF codes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Antimicrobial names, AMR codes, ATC codes and BNF codes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+has_amr <- requireNamespace("AMR", quietly = TRUE)
+library(opamr)
+```
+
+Prescribing and resistance data use different vocabularies for the same drug:
+
+| Vocabulary | Example for co-amoxiclav | Used by |
+|---|---|---|
+| BNF chemical code | `0501013K0` | NHS prescribing data, OpenPrescribing |
+| `AMR` code | `AMC` | the `AMR` package, susceptibility test results |
+| ATC code | `J01CR02` | WHO, ESAC-Net, GLASS, defined daily doses |
+| Name | Amoxicillin/clavulanic acid | everyone, spelled in different ways |
+
+`opamr` translates between them with the bundled `antibiotic_crosswalk` table.
+
+## The crosswalk table
+
+```{r}
+dim(antibiotic_crosswalk)
+head(antibiotic_crosswalk[, c("bnf_chemical_code", "bnf_name", "ab", "ab_name", "atc")], 8)
+```
+
+The table has one row per BNF chemical substance. Several chemicals can map to one antimicrobial, one for
+each salt or formulation:
+
+```{r}
+sys <- antibiotic_crosswalk[antibiotic_crosswalk$bnf_chapter == "05", ]
+dup <- sys[sys$ab %in% sys$ab[duplicated(sys$ab)], c("ab_name", "bnf_chemical_code", "bnf_name")]
+dup[order(dup$ab_name), ]
+```
+
+The same agent also appears in several BNF chapters. Chapter 5 holds systemic use (oral and injectable).
+Chapters 7, 11, 12 and 13 hold vaginal, eye, ear and skin products:
+
+```{r}
+table(chapter = antibiotic_crosswalk$bnf_chapter)
+```
+
+## Converting names and codes to BNF codes
+
+`ab_to_bnf()` accepts these inputs, and they can be mixed in one call:
+
+```{r}
+ab_to_bnf(c("AMC",                 # AMR code
+            "Co-trimoxazole",      # BNF or common name
+            "J01XE01",             # ATC code
+            "Carbapenems"),        # AMR group
+          use_amr = FALSE)[, c("input", "ab", "bnf_chemical_code", "bnf_name", "via")]
+```
+
+ATC prefixes select whole classes, following the ATC hierarchy:
+
+```{r}
+ab_to_bnf("J01C", output = "codes")    # all beta-lactam penicillins
+```
+
+### Systemic and topical scope
+
+`ab_to_bnf()` returns only chapter 5 (systemic) codes by default. Use `scope = "all"` to include topical
+and other formulations:
+
+```{r}
+ab_to_bnf("fusidic acid", output = "codes", use_amr = FALSE)
+ab_to_bnf("fusidic acid", scope = "all", use_amr = FALSE)[, c("bnf_chemical_code", "bnf_name")]
+```
+
+Systemic and topical prescribing measure different exposures. Fusidic acid cream and fusidic acid tablets,
+for example, are rarely interchangeable in an analysis. Keeping them apart by default stops them being
+pooled by accident.
+
+### Free text and brand names
+
+If the `AMR` package is installed, inputs that the bundled table does not recognise are passed to
+`AMR::as.ab()`. That function handles brand names, misspellings and synonyms. The `via` column records how
+each input was resolved, because `AMR::as.ab()` matching is fuzzy:
+
+```{r, eval = has_amr}
+ab_to_bnf(c("Augmentin", "amoxycillin", "Macrobid"))[, c("input", "ab_name", "bnf_chemical_code", "via")]
+```
+
+If `AMR::as.ab()` picks an agent with no BNF chemical, `ab_to_bnf()` warns and names the agent, so a wrong
+match is visible rather than silently returning nothing:
+
+```{r, eval = has_amr}
+x <- ab_to_bnf("amikacin")
+```
+
+Amikacin is given almost entirely in hospital, so it does not appear in community prescribing data.
+
+## From BNF codes back to antimicrobials
+
+`bnf_to_ab()` maps a code of any length:
+
+- longer than 9 characters (product or presentation): truncated to the chemical substance;
+- exactly 9 characters (chemical substance): looked up directly;
+- shorter than 9 characters (section, paragraph, subparagraph): expanded to every crosswalk chemical in that
+  part of the BNF.
+
+```{r}
+bnf_to_ab(c("0501013K0AAAJAJ", "050105"))[, c("input", "bnf_chemical_code", "ab", "ab_name")]
+bnf_to_atc(c("0501013B0", "0501120L0", "0501130R0"))
+```
+
+`bnf_class()` gives the BNF paragraph name, which is a convenient class variable for prescribing data:
+
+```{r}
+bnf_class(c("0501013B0", "0501021L0", "0501050B0", "0501130R0"))
+```
+
+## Aggregating to antibiotic classes
+
+`op_example` carries `AMR` codes, so `AMR` functions can add class information. Here the bundled
+`ab_group` column is used to sum 2025 items by class:
+
+```{r}
+ex <- op_example[format(op_example$date, "%Y") == "2025", ]
+grp <- antibiotic_crosswalk$ab_group[match(ex$ab, antibiotic_crosswalk$ab)]
+ex$class <- sub(" \\|.*$", "", grp)                     # first AMR group of each agent
+by_class <- aggregate(items ~ class, data = ex, FUN = sum)
+head(by_class[order(-by_class$items), ], 8)
+```
+
+The same can be done by BNF paragraph:
+
+```{r}
+ex$bnf_class <- bnf_class(substr(ex$code, 1, 9))
+head(sort(tapply(ex$items, ex$bnf_class, sum), decreasing = TRUE), 6)
+```
+
+If `AMR` is installed, its own functions add more information, for example WHO defined daily doses:
+
+```{r, eval = has_amr}
+data.frame(ab = c("AMX", "DOX", "NIT"),
+           name = AMR::ab_name(c("AMX", "DOX", "NIT")),
+           oral_ddd_g = AMR::ab_ddd(c("AMX", "DOX", "NIT"), administration = "oral"))
+```
+
+Converting prescribing to defined daily doses needs the strength and pack size of each presentation.
+OpenPrescribing's `quantity` (tablets, ml) does not provide these on its own, so `opamr` reports items.
+
+## How the crosswalk was built, and its limits
+
+- **Source of BNF codes.** Distinct BNF chemical substances in the English Prescribing Dataset for December
+  2025 and June 2026. Chemicals not dispensed in the community in those months are absent, such as most
+  hospital-only injectables.
+- **Matching.** BNF names were matched to `AMR` codes with `AMR::as.ab()` on cleaned name variants, with salt
+  words removed and bracketed synonyms split. A match was kept only if the agent's first non-salt word occurs
+  in the BNF name. This rule rejects false matches such as "Sodium citrate" to "Sodium aminosalicylate".
+- **Manual corrections.** `data-raw/manual_overrides.csv` in the source repository holds nine hand-checked
+  entries. Eight fix a mapping, for example colistimethate to colistin and plain ceftazidime rather than
+  ceftazidime/avibactam. One records that rifampicin combined preparations have no single `AMR` agent, so they
+  are left out of the table.
+- **Scope.** Antibacterials (including antimycobacterials), antifungals and topical anti-infectives.
+  Antivirals and antiparasitics are left out because the `AMR` package keeps them in separate datasets.
+- **Versions.** Built with `AMR` `r unique(antibiotic_crosswalk$amr_version)`. Run
+  `data-raw/build_crosswalk.R` again after an `AMR` update or a BNF change.
+
+```{r}
+table(antibiotic_crosswalk$match_method)
+```

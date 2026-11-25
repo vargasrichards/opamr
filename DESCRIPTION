@@ -1,0 +1,41 @@
+Package: opamr
+Type: Package
+Title: Antibiotic Prescribing Data from 'OpenPrescribing' Linked to the 'AMR' Package
+Version: 0.1.0
+Authors@R: person("Package", "Maintainer", email = "maintainer@example.org", role = c("aut", "cre"))
+Description: Retrieves English primary-care prescribing data (items, quantity and
+    cost by month and by organisation) from the 'OpenPrescribing' API
+    <https://openprescribing.net/api/>, and converts between antimicrobial names,
+    'AMR' package antimicrobial codes, ATC codes and British National Formulary (BNF)
+    chemical codes using a bundled crosswalk. Includes helpers for list-size and
+    STAR-PU denominators, and publication-quality 'ggplot2' functions (colour-blind
+    safe palette, direct labels, journal figure sizes) for prescribing time series,
+    seasonality, between-organisation distributions and drug-by-month heatmaps.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports:
+    ggplot2 (>= 3.5.0),
+    httr2 (>= 1.0.0),
+    jsonlite,
+    rlang,
+    scales,
+    stats,
+    tools,
+    utils
+Suggests:
+    AMR (>= 2.1.0),
+    knitr,
+    ragg,
+    rmarkdown,
+    testthat (>= 3.0.0),
+    vdiffr (>= 1.0.0),
+    withr
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Config/Needs/website: pkgdown
+Roxygen: list(markdown = TRUE)
+LazyData: true
+URL: https://OWNER.github.io/opamr/, https://github.com/OWNER/opamr
+BugReports: https://github.com/OWNER/opamr/issues
+Config/roxygen2/version: 8.1.0
