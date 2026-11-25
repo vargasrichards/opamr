@@ -5,8 +5,8 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/OWNER/opamr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/OWNER/opamr/actions/workflows/R-CMD-check.yaml)
-[![pkgdown](https://github.com/OWNER/opamr/actions/workflows/pkgdown.yaml/badge.svg)](https://OWNER.github.io/opamr/)
+[![R-CMD-check](https://github.com/vargasrichards/opamr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/vargasrichards/opamr/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/vargasrichards/opamr/actions/workflows/pkgdown.yaml/badge.svg)](https://vargasrichards.github.io/opamr/)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 <!-- badges: end -->
@@ -27,7 +27,7 @@ names), and draws publication-quality `ggplot2` figures.
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("OWNER/opamr")
+remotes::install_github("vargasrichards/opamr")
 ```
 
 `AMR` is optional. It lets free-text names, brand names and misspellings
@@ -87,14 +87,14 @@ op_save(p, "figure1.pdf", width = "single")   # 85 mm; "onehalf" 120 mm; "double
 
 ## Documentation
 
-- [Getting started](https://OWNER.github.io/opamr/articles/opamr.html)
+- [Getting started](https://vargasrichards.github.io/opamr/articles/opamr.html)
 - [Antimicrobial names, AMR codes, ATC codes and BNF
-  codes](https://OWNER.github.io/opamr/articles/crosswalk.html)
+  codes](https://vargasrichards.github.io/opamr/articles/crosswalk.html)
 - [Retrieving data from
-  OpenPrescribing](https://OWNER.github.io/opamr/articles/api.html)
+  OpenPrescribing](https://vargasrichards.github.io/opamr/articles/api.html)
 - [Publication-quality
-  figures](https://OWNER.github.io/opamr/articles/figures.html)
-- [Function reference](https://OWNER.github.io/opamr/reference/)
+  figures](https://vargasrichards.github.io/opamr/articles/figures.html)
+- [Function reference](https://vargasrichards.github.io/opamr/reference/)
 
 ## Data and limitations
 

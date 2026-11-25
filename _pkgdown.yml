@@ -1,4 +1,4 @@
-url: https://OWNER.github.io/opamr/
+url: https://vargasrichards.github.io/opamr/
 
 template:
   bootstrap: 5
@@ -12,7 +12,7 @@ navbar:
   components:
     github:
       icon: fa-github
-      href: https://github.com/OWNER/opamr
+      href: https://github.com/vargasrichards/opamr
       aria-label: GitHub
 
 home:

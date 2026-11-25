@@ -46,9 +46,9 @@ contain items, quantities and costs, \strong{not} indications, doses or patients
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://OWNER.github.io/opamr/}
-  \item \url{https://github.com/OWNER/opamr}
-  \item Report bugs at \url{https://github.com/OWNER/opamr/issues}
+  \item \url{https://vargasrichards.github.io/opamr/}
+  \item \url{https://github.com/vargasrichards/opamr}
+  \item Report bugs at \url{https://github.com/vargasrichards/opamr/issues}
 }
 
 }

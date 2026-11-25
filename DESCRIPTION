@@ -36,6 +36,6 @@ Config/testthat/edition: 3
 Config/Needs/website: pkgdown
 Roxygen: list(markdown = TRUE)
 LazyData: true
-URL: https://OWNER.github.io/opamr/, https://github.com/OWNER/opamr
-BugReports: https://github.com/OWNER/opamr/issues
+URL: https://vargasrichards.github.io/opamr/, https://github.com/vargasrichards/opamr
+BugReports: https://github.com/vargasrichards/opamr/issues
 Config/roxygen2/version: 8.1.0
