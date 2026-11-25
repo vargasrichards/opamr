@@ -1,0 +1,224 @@
+# opamr
+
+**opamr** retrieves English primary-care antibiotic prescribing data
+from [OpenPrescribing](https://openprescribing.net/api/), translates
+between the vocabularies used in prescribing and resistance data (BNF
+codes, ATC codes, [`AMR`](https://amr-for-r.org/) package codes and drug
+names), and draws publication-quality `ggplot2` figures.
+
+|  |  |
+|----|----|
+| **Crosswalk** | [`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md), [`bnf_to_ab()`](https://OWNER.github.io/opamr/reference/bnf_to_ab.md), [`atc_to_bnf()`](https://OWNER.github.io/opamr/reference/atc_to_bnf.md), [`bnf_to_atc()`](https://OWNER.github.io/opamr/reference/atc_to_bnf.md), [`op_antibiotics()`](https://OWNER.github.io/opamr/reference/op_antibiotics.md), [`bnf_class()`](https://OWNER.github.io/opamr/reference/bnf_level.md). Uses a bundled table of 121 BNF chemicals and works offline. |
+| **Data** | [`op_spending()`](https://OWNER.github.io/opamr/reference/op_spending.md) and [`op_spending_ab()`](https://OWNER.github.io/opamr/reference/op_spending_ab.md) (monthly items, quantity and cost nationally or by Sub-ICB Location, ICB, PCN or practice); [`op_org_details()`](https://OWNER.github.io/opamr/reference/op_org_details.md), [`op_rate()`](https://OWNER.github.io/opamr/reference/op_rate.md) and [`op_antibiotic_use()`](https://OWNER.github.io/opamr/reference/op_antibiotic_use.md) (list-size and STAR-PU rates); [`op_bnf_search()`](https://OWNER.github.io/opamr/reference/op_bnf_search.md) and [`op_org_search()`](https://OWNER.github.io/opamr/reference/op_org_search.md) |
+| **Figures** | [`op_plot_trend()`](https://OWNER.github.io/opamr/reference/op_plot_trend.md), [`op_plot_seasonal()`](https://OWNER.github.io/opamr/reference/op_plot_seasonal.md), [`op_plot_distribution()`](https://OWNER.github.io/opamr/reference/op_plot_distribution.md), [`op_plot_heatmap()`](https://OWNER.github.io/opamr/reference/op_plot_heatmap.md), [`theme_op()`](https://OWNER.github.io/opamr/reference/theme_op.md), [`op_save()`](https://OWNER.github.io/opamr/reference/op_save.md) |
+
+## Installation
+
+``` r
+
+# install.packages("remotes")
+remotes::install_github("OWNER/opamr")
+```
+
+`AMR` is optional. It lets free-text names, brand names and misspellings
+be resolved.
+
+## Example
+
+``` r
+
+library(opamr)
+
+# antimicrobial names, AMR codes and ATC codes -> BNF chemical codes
+ab_to_bnf(c("co-amoxiclav", "NIT", "J01AA02"), use_amr = FALSE)[, c("input", "ab", "atc", "bnf_chemical_code")]
+#>          input  ab     atc bnf_chemical_code
+#> 1 co-amoxiclav AMC J01CR02         0501013K0
+#> 2          NIT NIT J01XE01         0501130R0
+#> 3      J01AA02 DOX J01AA02         0501030I0
+#> 4      J01AA02 DOX J01AA02         0501030Z0
+
+# a whole class by ATC prefix
+ab_to_bnf("J01MA", output = "codes")
+#> [1] "0501120L0" "0501120P0" "0501120Q0" "0501120X0" "0501120Y0"
+
+# any BNF code (here a 15-character presentation) -> antimicrobial
+bnf_to_ab("0501013B0AAAAAA")[, c("input", "ab", "ab_name", "atc")]
+#>             input  ab     ab_name     atc
+#> 1 0501013B0AAAAAA AMX Amoxicillin J01CA04
+```
+
+Download prescribing (needs network access):
+
+``` r
+
+use  <- op_spending_ab(c("amoxicillin", "nitrofurantoin", "doxycycline"))               # England, monthly
+rate <- op_antibiotic_use("amoxicillin", org_type = "sicbl",
+                          denominator = "star_pu.oral_antibacterial_items")              # every Sub-ICB Location
+```
+
+Figures from the bundled national example data:
+
+``` r
+
+top <- op_example[op_example$ab_name %in% c("Amoxicillin", "Doxycycline", "Nitrofurantoin",
+                                            "Flucloxacillin", "Trimethoprim"), ]
+op_plot_trend(top, y = "items", events = data.frame(date = "2022-12-01", label = "Strep A surge"))
+```
+
+![](reference/figures/README-trend-1.png)
+
+``` r
+
+op_plot_seasonal(top[top$ab %in% c("AMX", "NIT"), ], y = "items", years = 2022:2026)
+```
+
+![](reference/figures/README-seasonal-1.png)
+
+``` r
+
+p <- op_plot_trend(top, y = "items")
+op_save(p, "figure1.pdf", width = "single")   # 85 mm; "onehalf" 120 mm; "double" 178 mm
+```
+
+## Documentation
+
+- [Getting started](https://OWNER.github.io/opamr/articles/opamr.html)
+- [Antimicrobial names, AMR codes, ATC codes and BNF
+  codes](https://OWNER.github.io/opamr/articles/crosswalk.html)
+- [Retrieving data from
+  OpenPrescribing](https://OWNER.github.io/opamr/articles/api.html)
+- [Publication-quality
+  figures](https://OWNER.github.io/opamr/articles/figures.html)
+- [Function reference](https://OWNER.github.io/opamr/reference/)
+
+## Data and limitations
+
+- **What the data cover.** Prescription items dispensed in the community
+  on prescriptions issued in English primary care. Data are monthly,
+  with a lag of about two months. Hospital inpatient use is not
+  included. There are no indications, doses or patient identifiers.
+- **Licence and citation.** The data are published by the NHS Business
+  Services Authority under the Open Government Licence v3.0, and served
+  by OpenPrescribing (Bennett Institute for Applied Data Science,
+  University of Oxford). Cite both.
+- **How `antibiotic_crosswalk` was built.** BNF chemical names from the
+  English Prescribing Dataset were matched to `AMR` codes with
+  [`AMR::as.ab()`](https://amr-for-r.org/reference/as.ab.html). Matches
+  were filtered to reject false positives, and a reviewed override table
+  was applied. Chemicals not dispensed in the community during the build
+  months are absent. Antivirals and antiparasitics are out of scope.
+  `data-raw/build_crosswalk.R` rebuilds the table.
+- **Where `op_example` comes from.** National monthly totals for BNF
+  section 5.1, aggregated from the English Prescribing Dataset
+  (`data-raw/build_example.R`). They were not downloaded through the
+  API.
+- **Testing of the API functions.** They are tested against mocked
+  responses with the structure used in the OpenPrescribing server
+  source. Live-API tests exist but are off by default: set
+  `OPAMR_LIVE_TESTS=true` to run them. OpenPrescribing sits behind bot
+  protection, which rejects some automated clients. If you see an “HTML
+  page” error, see
+  [`?op_check_api`](https://OWNER.github.io/opamr/reference/op_check_api.md).
+
+# Package index
+
+## Crosswalk
+
+Convert between antimicrobial names, AMR codes, ATC codes and BNF codes
+(offline).
+
+- [`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)
+  : Convert antimicrobial names, AMR codes or ATC codes to BNF codes
+- [`bnf_to_ab()`](https://OWNER.github.io/opamr/reference/bnf_to_ab.md)
+  : Convert BNF codes to AMR package antimicrobial codes
+- [`atc_to_bnf()`](https://OWNER.github.io/opamr/reference/atc_to_bnf.md)
+  [`bnf_to_atc()`](https://OWNER.github.io/opamr/reference/atc_to_bnf.md)
+  : Convert between ATC codes and BNF chemical codes
+- [`op_antibiotics()`](https://OWNER.github.io/opamr/reference/op_antibiotics.md)
+  : List the antimicrobials in the crosswalk
+- [`bnf_level()`](https://OWNER.github.io/opamr/reference/bnf_level.md)
+  [`bnf_parent()`](https://OWNER.github.io/opamr/reference/bnf_level.md)
+  [`bnf_class()`](https://OWNER.github.io/opamr/reference/bnf_level.md)
+  : Describe the structure of BNF codes
+
+## Prescribing data
+
+Monthly items, quantity and cost from the OpenPrescribing API.
+
+- [`op_spending()`](https://OWNER.github.io/opamr/reference/op_spending.md)
+  : Prescribing items, quantity and cost from OpenPrescribing
+- [`op_spending_ab()`](https://OWNER.github.io/opamr/reference/op_spending_ab.md)
+  : Prescribing data by antimicrobial name
+- [`op_antibiotic_use()`](https://OWNER.github.io/opamr/reference/op_antibiotic_use.md)
+  : Antimicrobial use as a rate, in one call
+
+## Denominators and rates
+
+- [`op_org_details()`](https://OWNER.github.io/opamr/reference/op_org_details.md)
+  : Practice list size and STAR-PU by organisation
+- [`op_rate()`](https://OWNER.github.io/opamr/reference/op_rate.md) :
+  Convert counts to rates per population or weighted-population
+  denominator
+
+## Lookups and API utilities
+
+- [`op_bnf_search()`](https://OWNER.github.io/opamr/reference/op_bnf_search.md)
+  : Search BNF codes
+- [`op_org_search()`](https://OWNER.github.io/opamr/reference/op_org_search.md)
+  : Search organisation codes
+- [`op_check_api()`](https://OWNER.github.io/opamr/reference/op_check_api.md)
+  : Check that the OpenPrescribing API is reachable
+- [`op_cache_clear()`](https://OWNER.github.io/opamr/reference/op_cache_clear.md)
+  : Clear the opamr response cache
+
+## Figures
+
+Publication-quality ggplot2 figures with a colour-blind safe palette and
+direct labels.
+
+- [`op_plot_trend()`](https://OWNER.github.io/opamr/reference/op_plot_trend.md)
+  : Publication-quality prescribing time series
+- [`op_plot_seasonal()`](https://OWNER.github.io/opamr/reference/op_plot_seasonal.md)
+  : Seasonal profile: one line per year
+- [`op_plot_distribution()`](https://OWNER.github.io/opamr/reference/op_plot_distribution.md)
+  : Distribution of prescribing across organisations over time
+- [`op_plot_heatmap()`](https://OWNER.github.io/opamr/reference/op_plot_heatmap.md)
+  : Heatmap of drugs (or organisations) by month
+- [`op_save()`](https://OWNER.github.io/opamr/reference/op_save.md) :
+  Save a figure at journal size
+- [`theme_op()`](https://OWNER.github.io/opamr/reference/theme_op.md) :
+  A clean, journal-ready ggplot2 theme
+- [`scale_colour_op()`](https://OWNER.github.io/opamr/reference/scale_colour_op.md)
+  [`scale_fill_op()`](https://OWNER.github.io/opamr/reference/scale_colour_op.md)
+  : Colour-blind safe discrete ggplot2 scales
+- [`op_palette()`](https://OWNER.github.io/opamr/reference/op_palette.md)
+  : Colour-blind safe palette
+
+## Data
+
+- [`antibiotic_crosswalk`](https://OWNER.github.io/opamr/reference/antibiotic_crosswalk.md)
+  : Antimicrobial crosswalk: BNF chemical substances and AMR package
+  antimicrobials
+- [`op_example`](https://OWNER.github.io/opamr/reference/op_example.md)
+  : Example national antibacterial prescribing, November 2020 to June
+  2026
+
+## Package
+
+- [`opamr`](https://OWNER.github.io/opamr/reference/opamr-package.md)
+  [`opamr-package`](https://OWNER.github.io/opamr/reference/opamr-package.md)
+  : opamr: antibiotic prescribing data from OpenPrescribing, linked to
+  the AMR package
+
+# Articles
+
+### Guides
+
+- [Getting started with
+  opamr](https://OWNER.github.io/opamr/articles/opamr.md):
+- [Antimicrobial names, AMR codes, ATC codes and BNF
+  codes](https://OWNER.github.io/opamr/articles/crosswalk.md):
+- [Retrieving data from
+  OpenPrescribing](https://OWNER.github.io/opamr/articles/api.md):
+- [Publication-quality
+  figures](https://OWNER.github.io/opamr/articles/figures.md):
