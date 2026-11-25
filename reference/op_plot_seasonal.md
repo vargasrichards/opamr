@@ -75,7 +75,7 @@ op_plot_seasonal(
 - base_size:
 
   Base font size (default 8 pt, see
-  [`theme_op()`](https://OWNER.github.io/opamr/reference/theme_op.md)).
+  [`theme_op()`](https://vargasrichards.github.io/opamr/reference/theme_op.md)).
 
 ## Value
 

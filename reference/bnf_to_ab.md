@@ -33,7 +33,7 @@ with `NA` and a warning.
 
 ## See also
 
-[`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)
+[`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md)
 
 ## Examples
 

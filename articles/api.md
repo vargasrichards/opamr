@@ -3,7 +3,7 @@
 The code in this vignette needs network access to `openprescribing.net`.
 It is not run when the package is built, so no output is shown. The
 output layouts described are the ones the package tests check. Run
-[`op_check_api()`](https://OWNER.github.io/opamr/reference/op_check_api.md)
+[`op_check_api()`](https://vargasrichards.github.io/opamr/reference/op_check_api.md)
 first to confirm the API can be reached from your machine.
 
 ``` r
@@ -33,7 +33,7 @@ op_org_search("Densham", "practice")
 
 ## Items, quantity and cost
 
-[`op_spending()`](https://OWNER.github.io/opamr/reference/op_spending.md)
+[`op_spending()`](https://vargasrichards.github.io/opamr/reference/op_spending.md)
 takes BNF codes at any level. OpenPrescribing sums everything under a
 code prefix, so `"0501"` gives all antibacterials and `"0501013B0"`
 gives amoxicillin.
@@ -50,9 +50,9 @@ columns:
 
     date  org_type  org_id  org_name  code  items  quantity  actual_cost
 
-[`op_spending_ab()`](https://OWNER.github.io/opamr/reference/op_spending_ab.md)
+[`op_spending_ab()`](https://vargasrichards.github.io/opamr/reference/op_spending_ab.md)
 does the same by antimicrobial. It looks up BNF codes with
-[`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)
+[`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md)
 and sums the chemicals that belong to one agent:
 
 ``` r
@@ -79,7 +79,7 @@ Dataset) is usually faster.
 
 ## Denominators and rates
 
-[`op_org_details()`](https://OWNER.github.io/opamr/reference/op_org_details.md)
+[`op_org_details()`](https://vargasrichards.github.io/opamr/reference/op_org_details.md)
 returns monthly list sizes and weighted denominators at any organisation
 level:
 
@@ -95,7 +95,7 @@ den  <- op_org_details("sicbl", keys = c("total_list_size", "star_pu.oral_antiba
 rate <- op_rate(all_sub, den, denominator = "star_pu_oral_antibacterial_items")
 ```
 
-[`op_antibiotic_use()`](https://OWNER.github.io/opamr/reference/op_antibiotic_use.md)
+[`op_antibiotic_use()`](https://vargasrichards.github.io/opamr/reference/op_antibiotic_use.md)
 downloads prescribing and the denominator and computes the rate in one
 call:
 
@@ -116,7 +116,7 @@ op_plot_distribution(amx_rates, y = "rate", highlight = "02P")
   ```
 
   Clear the cache with
-  [`op_cache_clear()`](https://OWNER.github.io/opamr/reference/op_cache_clear.md),
+  [`op_cache_clear()`](https://vargasrichards.github.io/opamr/reference/op_cache_clear.md),
   for example after the monthly data release.
 
 - Requests are limited to 2 per second. Change this with

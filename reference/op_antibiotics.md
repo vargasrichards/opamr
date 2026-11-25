@@ -1,7 +1,7 @@
 # List the antimicrobials in the crosswalk
 
 Convenience filter on
-[antibiotic_crosswalk](https://OWNER.github.io/opamr/reference/antibiotic_crosswalk.md).
+[antibiotic_crosswalk](https://vargasrichards.github.io/opamr/reference/antibiotic_crosswalk.md).
 
 ## Usage
 
@@ -28,7 +28,7 @@ op_antibiotics(scope = c("systemic", "all"), section = NULL, ab_group = NULL)
 ## Value
 
 A data frame (subset of
-[antibiotic_crosswalk](https://OWNER.github.io/opamr/reference/antibiotic_crosswalk.md))
+[antibiotic_crosswalk](https://vargasrichards.github.io/opamr/reference/antibiotic_crosswalk.md))
 with an added `bnf_class` column giving the BNF paragraph label where
 known.
 

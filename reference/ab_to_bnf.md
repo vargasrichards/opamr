@@ -1,7 +1,7 @@
 # Convert antimicrobial names, AMR codes or ATC codes to BNF codes
 
 Looks up each input in the bundled
-[antibiotic_crosswalk](https://OWNER.github.io/opamr/reference/antibiotic_crosswalk.md)
+[antibiotic_crosswalk](https://vargasrichards.github.io/opamr/reference/antibiotic_crosswalk.md)
 and returns the matching BNF chemical substance code(s). Inputs can be:
 
 ## Usage
@@ -75,9 +75,9 @@ fuzzy; check the `via` column and `ab_name`.
 
 ## See also
 
-[`bnf_to_ab()`](https://OWNER.github.io/opamr/reference/bnf_to_ab.md),
-[`atc_to_bnf()`](https://OWNER.github.io/opamr/reference/atc_to_bnf.md),
-[`op_antibiotics()`](https://OWNER.github.io/opamr/reference/op_antibiotics.md)
+[`bnf_to_ab()`](https://vargasrichards.github.io/opamr/reference/bnf_to_ab.md),
+[`atc_to_bnf()`](https://vargasrichards.github.io/opamr/reference/atc_to_bnf.md),
+[`op_antibiotics()`](https://vargasrichards.github.io/opamr/reference/op_antibiotics.md)
 
 ## Examples
 

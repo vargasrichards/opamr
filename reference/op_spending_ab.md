@@ -2,9 +2,9 @@
 
 Looks up BNF chemical codes for antimicrobials (names, `AMR` codes, ATC
 codes or groups, see
-[`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)),
+[`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md)),
 downloads their prescribing with
-[`op_spending()`](https://OWNER.github.io/opamr/reference/op_spending.md),
+[`op_spending()`](https://vargasrichards.github.io/opamr/reference/op_spending.md),
 and labels the result with the `AMR` code, name and ATC code. When
 several BNF chemicals belong to one agent (for example doxycycline
 hyclate and doxycycline monohydrate) they are summed per agent by
@@ -31,7 +31,7 @@ op_spending_ab(
 
   Antimicrobial names, `AMR` codes, ATC codes/prefixes or group names
   (see
-  [`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)).
+  [`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md)).
 
 - org_type:
 
@@ -82,7 +82,7 @@ op_spending_ab(
 ## Value
 
 A data frame as from
-[`op_spending()`](https://OWNER.github.io/opamr/reference/op_spending.md)
+[`op_spending()`](https://vargasrichards.github.io/opamr/reference/op_spending.md)
 with extra columns `ab`, `ab_name`, `atc` (and `code` listing the BNF
 chemical code(s) combined).
 

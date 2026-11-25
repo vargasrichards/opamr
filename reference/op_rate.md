@@ -21,14 +21,14 @@ op_rate(
 - x:
 
   Data frame from
-  [`op_spending()`](https://OWNER.github.io/opamr/reference/op_spending.md)
+  [`op_spending()`](https://vargasrichards.github.io/opamr/reference/op_spending.md)
   or
-  [`op_spending_ab()`](https://OWNER.github.io/opamr/reference/op_spending_ab.md).
+  [`op_spending_ab()`](https://vargasrichards.github.io/opamr/reference/op_spending_ab.md).
 
 - details:
 
   Data frame from
-  [`op_org_details()`](https://OWNER.github.io/opamr/reference/op_org_details.md)
+  [`op_org_details()`](https://vargasrichards.github.io/opamr/reference/op_org_details.md)
   at the same organisation level.
 
 - numerator:

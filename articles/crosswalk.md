@@ -78,7 +78,7 @@ table(chapter = antibiotic_crosswalk$bnf_chapter)
 
 ## Converting names and codes to BNF codes
 
-[`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)
+[`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md)
 accepts these inputs, and they can be mixed in one call:
 
 ``` r
@@ -113,7 +113,7 @@ ab_to_bnf("J01C", output = "codes")    # all beta-lactam penicillins
 
 ### Systemic and topical scope
 
-[`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)
+[`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md)
 returns only chapter 5 (systemic) codes by default. Use `scope = "all"`
 to include topical and other formulations:
 
@@ -157,7 +157,7 @@ ab_to_bnf(c("Augmentin", "amoxycillin", "Macrobid"))[, c("input", "ab_name", "bn
 
 If [`AMR::as.ab()`](https://amr-for-r.org/reference/as.ab.html) picks an
 agent with no BNF chemical,
-[`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)
+[`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md)
 warns and names the agent, so a wrong match is visible rather than
 silently returning nothing:
 
@@ -173,7 +173,7 @@ community prescribing data.
 
 ## From BNF codes back to antimicrobials
 
-[`bnf_to_ab()`](https://OWNER.github.io/opamr/reference/bnf_to_ab.md)
+[`bnf_to_ab()`](https://vargasrichards.github.io/opamr/reference/bnf_to_ab.md)
 maps a code of any length:
 
 - longer than 9 characters (product or presentation): truncated to the
@@ -197,7 +197,7 @@ bnf_to_atc(c("0501013B0", "0501120L0", "0501130R0"))
 #> "J01CA04" "J01MA02" "J01XE01"
 ```
 
-[`bnf_class()`](https://OWNER.github.io/opamr/reference/bnf_level.md)
+[`bnf_class()`](https://vargasrichards.github.io/opamr/reference/bnf_level.md)
 gives the BNF paragraph name, which is a convenient class variable for
 prescribing data:
 

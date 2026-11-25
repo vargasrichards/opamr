@@ -14,7 +14,7 @@
 
 This vignette shows each part using only bundled data, so every chunk
 runs without a network connection.
-[`vignette("api", package = "opamr")`](https://OWNER.github.io/opamr/articles/api.md)
+[`vignette("api", package = "opamr")`](https://vargasrichards.github.io/opamr/articles/api.md)
 covers downloading data.
 
 ``` r
@@ -26,7 +26,7 @@ library(opamr)
 
 Prescribing data are indexed by BNF code, while resistance data and the
 `AMR` package use antimicrobial names, `AMR` codes or ATC codes.
-[`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)
+[`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md)
 converts any of these:
 
 ``` r
@@ -67,7 +67,7 @@ bnf_to_ab(c("0501013B0AAAAAA", "0501130R0"))[, c("input", "ab", "ab_name", "atc"
 #> 2       0501130R0 NIT Nitrofurantoin J01XE01
 ```
 
-[`vignette("crosswalk", package = "opamr")`](https://OWNER.github.io/opamr/articles/crosswalk.md)
+[`vignette("crosswalk", package = "opamr")`](https://vargasrichards.github.io/opamr/articles/crosswalk.md)
 describes how the crosswalk was built and where it stops.
 
 ## Prescribing data
@@ -82,7 +82,7 @@ sub <- op_antibiotic_use("co-amoxiclav", org_type = "sicbl", org = "02P")      #
 ```
 
 The bundled `op_example` dataset has the same layout as
-[`op_spending_ab()`](https://OWNER.github.io/opamr/reference/op_spending_ab.md)
+[`op_spending_ab()`](https://vargasrichards.github.io/opamr/reference/op_spending_ab.md)
 output. It covers national monthly totals for every antibacterial in BNF
 section 5.1 from November 2020 to June 2026, aggregated from the NHS
 Business Services Authority English Prescribing Dataset.
@@ -141,8 +141,8 @@ op_plot_trend(top, y = "items",
 Each line is labelled at its right-hand end, so there is no legend. The
 colours come from the colour-blind-safe Okabe-Ito palette. The caption
 cites the data source and licence.
-[`op_save()`](https://OWNER.github.io/opamr/reference/op_save.md) writes
-the figure at a journal column width:
+[`op_save()`](https://vargasrichards.github.io/opamr/reference/op_save.md)
+writes the figure at a journal column width:
 
 ``` r
 
@@ -150,7 +150,7 @@ p <- op_plot_trend(top, y = "items")
 op_save(p, "figure1.pdf", width = "single")    # 85 mm wide; "onehalf" = 120 mm, "double" = 178 mm
 ```
 
-[`vignette("figures", package = "opamr")`](https://OWNER.github.io/opamr/articles/figures.md)
+[`vignette("figures", package = "opamr")`](https://vargasrichards.github.io/opamr/articles/figures.md)
 covers all of the figure functions.
 
 ## What the data measure

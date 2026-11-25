@@ -24,7 +24,7 @@ op_spending(
   Character vector of BNF codes. Any level works (section `"0501"`,
   chemical `"0501013B0"`, product, presentation); OpenPrescribing sums
   everything under a code prefix. Use
-  [`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)
+  [`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md)
   to obtain chemical codes from antimicrobial names.
 
 - org_type:
@@ -76,11 +76,11 @@ dispensed outside England or privately are not included.
 
 ## See also
 
-[`op_spending_ab()`](https://OWNER.github.io/opamr/reference/op_spending_ab.md)
+[`op_spending_ab()`](https://vargasrichards.github.io/opamr/reference/op_spending_ab.md)
 to query by antimicrobial name,
-[`op_org_details()`](https://OWNER.github.io/opamr/reference/op_org_details.md)
+[`op_org_details()`](https://vargasrichards.github.io/opamr/reference/op_org_details.md)
 for denominators,
-[`op_rate()`](https://OWNER.github.io/opamr/reference/op_rate.md).
+[`op_rate()`](https://vargasrichards.github.io/opamr/reference/op_rate.md).
 
 ## Examples
 

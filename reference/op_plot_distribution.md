@@ -4,7 +4,7 @@ Summarises many organisations (practices, Sub-ICB Locations, ...) per
 month as the median with 25th-75th and 5th-95th percentile bands, and
 optionally overlays named organisations. Use it with a **rate** (for
 example from
-[`op_antibiotic_use()`](https://OWNER.github.io/opamr/reference/op_antibiotic_use.md))
+[`op_antibiotic_use()`](https://vargasrichards.github.io/opamr/reference/op_antibiotic_use.md))
 so organisations of different sizes are comparable.
 
 ## Usage
@@ -81,7 +81,7 @@ op_plot_distribution(
 - base_size:
 
   Base font size (default 8 pt, see
-  [`theme_op()`](https://OWNER.github.io/opamr/reference/theme_op.md)).
+  [`theme_op()`](https://vargasrichards.github.io/opamr/reference/theme_op.md)).
 
 ## Value
 

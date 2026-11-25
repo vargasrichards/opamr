@@ -1,9 +1,10 @@
 # Antimicrobial use as a rate, in one call
 
 Combines
-[`op_spending_ab()`](https://OWNER.github.io/opamr/reference/op_spending_ab.md),
-[`op_org_details()`](https://OWNER.github.io/opamr/reference/op_org_details.md)
-and [`op_rate()`](https://OWNER.github.io/opamr/reference/op_rate.md):
+[`op_spending_ab()`](https://vargasrichards.github.io/opamr/reference/op_spending_ab.md),
+[`op_org_details()`](https://vargasrichards.github.io/opamr/reference/op_org_details.md)
+and
+[`op_rate()`](https://vargasrichards.github.io/opamr/reference/op_rate.md):
 downloads prescribing for the requested antimicrobials, downloads the
 denominator at the same organisation level, and returns items per 1,000
 registered patients (or another denominator).
@@ -30,7 +31,7 @@ op_antibiotic_use(
 
   Antimicrobial names, `AMR` codes, ATC codes/prefixes or group names
   (see
-  [`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)).
+  [`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md)).
 
 - org_type:
 
@@ -55,7 +56,7 @@ op_antibiotic_use(
 - denominator:
 
   Denominator key from
-  [`op_org_details()`](https://OWNER.github.io/opamr/reference/op_org_details.md);
+  [`op_org_details()`](https://vargasrichards.github.io/opamr/reference/op_org_details.md);
   default `"total_list_size"`. `"star_pu.oral_antibacterial_items"`
   gives STAR-PU weighted rates.
 
@@ -85,7 +86,7 @@ op_antibiotic_use(
 ## Value
 
 A data frame as from
-[`op_spending_ab()`](https://OWNER.github.io/opamr/reference/op_spending_ab.md)
+[`op_spending_ab()`](https://vargasrichards.github.io/opamr/reference/op_spending_ab.md)
 plus the denominator column and `rate`.
 
 ## Examples

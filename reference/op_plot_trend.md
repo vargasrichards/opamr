@@ -2,10 +2,10 @@
 
 Draws one line per antimicrobial (or other group) with direct labels at
 the right-hand end instead of a legend. Output of
-[`op_spending()`](https://OWNER.github.io/opamr/reference/op_spending.md),
-[`op_spending_ab()`](https://OWNER.github.io/opamr/reference/op_spending_ab.md)
+[`op_spending()`](https://vargasrichards.github.io/opamr/reference/op_spending.md),
+[`op_spending_ab()`](https://vargasrichards.github.io/opamr/reference/op_spending_ab.md)
 or
-[`op_antibiotic_use()`](https://OWNER.github.io/opamr/reference/op_antibiotic_use.md)
+[`op_antibiotic_use()`](https://vargasrichards.github.io/opamr/reference/op_antibiotic_use.md)
 can be passed directly.
 
 ## Usage
@@ -104,7 +104,7 @@ op_plot_trend(
 - base_size:
 
   Base font size (default 8 pt, see
-  [`theme_op()`](https://OWNER.github.io/opamr/reference/theme_op.md)).
+  [`theme_op()`](https://vargasrichards.github.io/opamr/reference/theme_op.md)).
 
 ## Value
 

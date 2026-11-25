@@ -17,7 +17,7 @@ op_org_details(org_type = "national", org = NULL, keys = "total_list_size")
 - org_type, org:
 
   As in
-  [`op_spending()`](https://OWNER.github.io/opamr/reference/op_spending.md).
+  [`op_spending()`](https://vargasrichards.github.io/opamr/reference/op_spending.md).
   For `"national"` all practices in England are summed.
 
 - keys:

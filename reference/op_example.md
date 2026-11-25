@@ -3,7 +3,7 @@
 Monthly national totals for every BNF chemical substance in section 5.1
 (antibacterial drugs) in the crosswalk, in the same layout as the output
 of
-[`op_spending_ab()`](https://OWNER.github.io/opamr/reference/op_spending_ab.md).
+[`op_spending_ab()`](https://vargasrichards.github.io/opamr/reference/op_spending_ab.md).
 The dataset lets the examples and figures run offline.
 
 ## Usage

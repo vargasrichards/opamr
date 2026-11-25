@@ -21,7 +21,7 @@ bnf_to_atc(code)
 - ...:
 
   Passed to
-  [`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)
+  [`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md)
   (`scope`, `output`).
 
 - code:
@@ -31,7 +31,7 @@ bnf_to_atc(code)
 ## Value
 
 `atc_to_bnf()`: as
-[`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md).
+[`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md).
 `bnf_to_atc()`: a named character vector of primary ATC codes, named by
 input.
 

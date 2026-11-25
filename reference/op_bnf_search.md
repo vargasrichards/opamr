@@ -27,7 +27,7 @@ A data frame with columns `type`, `id` (BNF code or section number),
 
 ## See also
 
-[`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md)
+[`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md)
 for offline name-to-code conversion
 
 ## Examples

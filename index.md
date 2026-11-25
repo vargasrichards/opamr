@@ -8,16 +8,16 @@ names), and draws publication-quality `ggplot2` figures.
 
 |  |  |
 |----|----|
-| **Crosswalk** | [`ab_to_bnf()`](https://OWNER.github.io/opamr/reference/ab_to_bnf.md), [`bnf_to_ab()`](https://OWNER.github.io/opamr/reference/bnf_to_ab.md), [`atc_to_bnf()`](https://OWNER.github.io/opamr/reference/atc_to_bnf.md), [`bnf_to_atc()`](https://OWNER.github.io/opamr/reference/atc_to_bnf.md), [`op_antibiotics()`](https://OWNER.github.io/opamr/reference/op_antibiotics.md), [`bnf_class()`](https://OWNER.github.io/opamr/reference/bnf_level.md). Uses a bundled table of 121 BNF chemicals and works offline. |
-| **Data** | [`op_spending()`](https://OWNER.github.io/opamr/reference/op_spending.md) and [`op_spending_ab()`](https://OWNER.github.io/opamr/reference/op_spending_ab.md) (monthly items, quantity and cost nationally or by Sub-ICB Location, ICB, PCN or practice); [`op_org_details()`](https://OWNER.github.io/opamr/reference/op_org_details.md), [`op_rate()`](https://OWNER.github.io/opamr/reference/op_rate.md) and [`op_antibiotic_use()`](https://OWNER.github.io/opamr/reference/op_antibiotic_use.md) (list-size and STAR-PU rates); [`op_bnf_search()`](https://OWNER.github.io/opamr/reference/op_bnf_search.md) and [`op_org_search()`](https://OWNER.github.io/opamr/reference/op_org_search.md) |
-| **Figures** | [`op_plot_trend()`](https://OWNER.github.io/opamr/reference/op_plot_trend.md), [`op_plot_seasonal()`](https://OWNER.github.io/opamr/reference/op_plot_seasonal.md), [`op_plot_distribution()`](https://OWNER.github.io/opamr/reference/op_plot_distribution.md), [`op_plot_heatmap()`](https://OWNER.github.io/opamr/reference/op_plot_heatmap.md), [`theme_op()`](https://OWNER.github.io/opamr/reference/theme_op.md), [`op_save()`](https://OWNER.github.io/opamr/reference/op_save.md) |
+| **Crosswalk** | [`ab_to_bnf()`](https://vargasrichards.github.io/opamr/reference/ab_to_bnf.md), [`bnf_to_ab()`](https://vargasrichards.github.io/opamr/reference/bnf_to_ab.md), [`atc_to_bnf()`](https://vargasrichards.github.io/opamr/reference/atc_to_bnf.md), [`bnf_to_atc()`](https://vargasrichards.github.io/opamr/reference/atc_to_bnf.md), [`op_antibiotics()`](https://vargasrichards.github.io/opamr/reference/op_antibiotics.md), [`bnf_class()`](https://vargasrichards.github.io/opamr/reference/bnf_level.md). Uses a bundled table of 121 BNF chemicals and works offline. |
+| **Data** | [`op_spending()`](https://vargasrichards.github.io/opamr/reference/op_spending.md) and [`op_spending_ab()`](https://vargasrichards.github.io/opamr/reference/op_spending_ab.md) (monthly items, quantity and cost nationally or by Sub-ICB Location, ICB, PCN or practice); [`op_org_details()`](https://vargasrichards.github.io/opamr/reference/op_org_details.md), [`op_rate()`](https://vargasrichards.github.io/opamr/reference/op_rate.md) and [`op_antibiotic_use()`](https://vargasrichards.github.io/opamr/reference/op_antibiotic_use.md) (list-size and STAR-PU rates); [`op_bnf_search()`](https://vargasrichards.github.io/opamr/reference/op_bnf_search.md) and [`op_org_search()`](https://vargasrichards.github.io/opamr/reference/op_org_search.md) |
+| **Figures** | [`op_plot_trend()`](https://vargasrichards.github.io/opamr/reference/op_plot_trend.md), [`op_plot_seasonal()`](https://vargasrichards.github.io/opamr/reference/op_plot_seasonal.md), [`op_plot_distribution()`](https://vargasrichards.github.io/opamr/reference/op_plot_distribution.md), [`op_plot_heatmap()`](https://vargasrichards.github.io/opamr/reference/op_plot_heatmap.md), [`theme_op()`](https://vargasrichards.github.io/opamr/reference/theme_op.md), [`op_save()`](https://vargasrichards.github.io/opamr/reference/op_save.md) |
 
 ## Installation
 
 ``` r
 
 # install.packages("remotes")
-remotes::install_github("OWNER/opamr")
+remotes::install_github("vargasrichards/opamr")
 ```
 
 `AMR` is optional. It lets free-text names, brand names and misspellings
@@ -82,14 +82,16 @@ op_save(p, "figure1.pdf", width = "single")   # 85 mm; "onehalf" 120 mm; "double
 
 ## Documentation
 
-- [Getting started](https://OWNER.github.io/opamr/articles/opamr.html)
+- [Getting
+  started](https://vargasrichards.github.io/opamr/articles/opamr.html)
 - [Antimicrobial names, AMR codes, ATC codes and BNF
-  codes](https://OWNER.github.io/opamr/articles/crosswalk.html)
+  codes](https://vargasrichards.github.io/opamr/articles/crosswalk.html)
 - [Retrieving data from
-  OpenPrescribing](https://OWNER.github.io/opamr/articles/api.html)
+  OpenPrescribing](https://vargasrichards.github.io/opamr/articles/api.html)
 - [Publication-quality
-  figures](https://OWNER.github.io/opamr/articles/figures.html)
-- [Function reference](https://OWNER.github.io/opamr/reference/)
+  figures](https://vargasrichards.github.io/opamr/articles/figures.html)
+- [Function
+  reference](https://vargasrichards.github.io/opamr/reference/)
 
 ## Data and limitations
 
@@ -118,4 +120,4 @@ op_save(p, "figure1.pdf", width = "single")   # 85 mm; "onehalf" 120 mm; "double
   `OPAMR_LIVE_TESTS=true` to run them. OpenPrescribing sits behind bot
   protection, which rejects some automated clients. If you see an “HTML
   page” error, see
-  [`?op_check_api`](https://OWNER.github.io/opamr/reference/op_check_api.md).
+  [`?op_check_api`](https://vargasrichards.github.io/opamr/reference/op_check_api.md).

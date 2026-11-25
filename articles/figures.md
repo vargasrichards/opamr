@@ -18,7 +18,7 @@ modified with `+`. They share these defaults:
   OpenPrescribing and the licence. Turn it off with `source = FALSE` or
   replace it with your own text.
 - **Journal sizes.**
-  [`op_save()`](https://OWNER.github.io/opamr/reference/op_save.md)
+  [`op_save()`](https://vargasrichards.github.io/opamr/reference/op_save.md)
   writes at 85, 120 or 178 mm wide, at 300 dpi for raster formats.
 
 All examples use the bundled `op_example` data (national items by
@@ -146,9 +146,10 @@ op_plot_heatmap(ex, y = "items", scale = "none", order_by = "name")
 
 ## Rates and axis labels
 
-When [`op_rate()`](https://OWNER.github.io/opamr/reference/op_rate.md)
+When
+[`op_rate()`](https://vargasrichards.github.io/opamr/reference/op_rate.md)
 (or
-[`op_antibiotic_use()`](https://OWNER.github.io/opamr/reference/op_antibiotic_use.md))
+[`op_antibiotic_use()`](https://vargasrichards.github.io/opamr/reference/op_antibiotic_use.md))
 adds a `rate` column, it records the rate definition. The plot functions
 use that definition as the y-axis label. The list size below is an
 illustrative constant, not real data:
@@ -175,8 +176,9 @@ op_plot_trend(ex, y = "actual_cost", highlight = c("Amoxicillin", "Nitrofurantoi
 
 ![](figures_files/figure-html/custom-1.png)
 
-[`theme_op()`](https://OWNER.github.io/opamr/reference/theme_op.md) and
-[`scale_colour_op()`](https://OWNER.github.io/opamr/reference/scale_colour_op.md)
+[`theme_op()`](https://vargasrichards.github.io/opamr/reference/theme_op.md)
+and
+[`scale_colour_op()`](https://vargasrichards.github.io/opamr/reference/scale_colour_op.md)
 can also be used on your own plots:
 
 ``` r
